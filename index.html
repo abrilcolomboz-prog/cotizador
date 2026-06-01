@@ -3,19 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cotizador USD / ARS</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <title>COTIZADOR POCAMARKET</title>
+    <!-- Importamos la fuente Montserrat desde Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
         /* Estilos Globales */
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: 'Inter', sans-serif;
+            font-family: 'Montserrat', sans-serif;
         }
 
         body {
-            background-color: #f3f4f6; /* Fondo gris claro */
+            /* Fondo Rosa Pastel */
+            background-color: #FFD1DC; 
+            /* Diseño sutil de estrellas blancas usando SVG */
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 60 60"><path d="M15 5l1.2 2.5 2.8.4-2 2 1.3 2.6-2.3-1.5-2.3 1.5 1.3-2.6-2-2 2.8-.4L15 5zm30 30l.8 1.7 1.9.3-1.4 1.3.9 1.8-1.6-1-1.6 1 .9-1.8-1.4-1.3 1.9-.3.8-1.7zm5-20l.5 1 .9.2-.7.7.4 1-.8-.5-.8.5.4-1-.7-.7.9-.2.5-1z" fill="%23FFFFFF" fill-opacity="0.5"/></svg>');
             display: flex;
             justify-content: center;
             align-items: center;
@@ -25,73 +29,101 @@
 
         /* Contenedor del Cotizador (Contained) */
         .cotizador-container {
-            background-color: #ffffff;
+            background-color: #ffffff; /* Blanco puro */
             max-width: 450px;
             width: 100%;
-            padding: 30px;
-            border-radius: 16px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
-            border: 1px solid #e5e7eb;
+            padding: 35px 30px;
+            border-radius: 24px;
+            box-shadow: 0 12px 30px rgba(255, 182, 193, 0.4); /* Sombra rosa suave */
+            border: 1px solid rgba(255, 255, 255, 0.7);
+            text-align: center;
         }
 
+        /* Título en Montserrat Negrita */
         h1 {
             font-size: 24px;
-            color: #1f2937;
-            text-align: center;
+            color: #111827;
+            font-weight: 700; /* Negrita */
             margin-bottom: 8px;
-            font-weight: 700;
+            letter-spacing: -0.5px;
         }
 
-        .text-muted {
+        /* Subtítulo en Montserrat Negro */
+        .subtitulo {
             font-size: 14px;
-            color: #6b7280;
-            text-align: center;
-            margin-bottom: 24px;
+            color: #000000; /* Color negro */
+            font-weight: 500;
+            margin-bottom: 28px;
         }
 
-        /* Bloques de entrada */
+        /* Bloque del único Input */
         .input-group {
-            margin-bottom: 20px;
+            margin-bottom: 28px;
+            text-align: left;
         }
 
         label {
             display: block;
-            font-size: 14px;
-            font-weight: 500;
-            color: #4b5563;
-            margin-bottom: 6px;
-        }
-
-        .input-wrapper {
-            position: relative;
-            display: flex;
-            align-items: center;
-        }
-
-        .currency-symbol {
-            position: absolute;
-            left: 14px;
-            color: #9ca3af;
-            font-weight: 500;
+            font-size: 13px;
+            font-weight: 700;
+            color: #ff8fa3; /* Rosa oscuro estético para el label */
+            text-transform: uppercase;
+            margin-bottom: 8px;
+            letter-spacing: 0.5px;
         }
 
         input[type="number"] {
             width: 100%;
-            padding: 12px 14px 12px 35px;
+            padding: 14px 16px;
             font-size: 16px;
-            border: 1px solid #d1d5db;
-            border-radius: 8px;
+            border: 2px solid #ffe4e1; /* Rosa muy pálido */
+            border-radius: 12px;
             outline: none;
             transition: all 0.2s ease;
-            color: #111827;
+            color: #333333;
+            background-color: #fffafb;
         }
 
         input[type="number"]:focus {
-            border-color: #3b82f6;
-            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+            border-color: #ffb6c1;
+            box-shadow: 0 0 0 4px rgba(255, 182, 193, 0.3);
+            background-color: #ffffff;
         }
 
-        /* Eliminar flechas nativas de los inputs de número */
+        /* Sección de Resultados */
+        .resultados-box {
+            background-color: #fff5f6; /* Fondo rosa ultra claro */
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 10px;
+            border: 1px dashed #ffccd5;
+        }
+
+        .resultado-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+        }
+
+        .resultado-item:first-child {
+            border-bottom: 1px solid #ffe4e1;
+        }
+
+        .res-label {
+            font-size: 13px;
+            color: #666666;
+            font-weight: 500;
+            text-align: left;
+        }
+
+        .res-value {
+            font-size: 18px;
+            color: #ff758f; /* Rosa destacado para el precio */
+            font-weight: 700;
+        }
+
+        /* Eliminar flechas nativas del input */
         input::-webkit-outer-spin-button,
         input::-webkit-inner-spin-button {
             -webkit-appearance: none;
@@ -100,69 +132,55 @@
         input[type=number] {
             -moz-appearance: textfield;
         }
-
-        /* Footer del contenedor */
-        .footer-info {
-            margin-top: 24px;
-            padding-top: 16px;
-            border-top: 1px solid #f3f4f6;
-            text-align: center;
-            font-size: 12px;
-            color: #9ca3af;
-        }
     </style>
 </head>
 <body>
 
     <div class="cotizador-container">
-        <h1>Cotizador de Divisas</h1>
-        <p class="text-muted">Tipo de cambio fijo: 1 USD = $1500 ARS</p>
+        <h1>COTIZADOR POCAMARKET</h1>
+        <div class="subtitulo">pocamarket dubupuff - dólar 1500</div>
 
+        <!-- Único espacio para ingresar monto -->
         <div class="input-group">
-            <label for="usd-input">Dólares Estadounidenses (USD)</label>
-            <div class="input-wrapper">
-                <span class="currency-symbol">US$</span>
-                <input type="number" id="usd-input" placeholder="0.00" min="0" step="any">
-            </div>
+            <label for="monto-input">ingresar el monto con punto. ejemplo: 2.50</label>
+            <input type="number" id="monto-input" placeholder="0.00" min="0" step="any" autofocus>
         </div>
 
-        <div class="input-group">
-            <label for="ars-input">Pesos Argentinos (ARS)</label>
-            <div class="input-wrapper">
-                <span class="currency-symbol">$</span>
-                <input type="number" id="ars-input" placeholder="0.00" min="0" step="any">
+        <!-- Cuadro de resultados automáticos -->
+        <div class="resultados-box">
+            <div class="resultado-item">
+                <span class="res-label">Si son Dólares (USD):</span>
+                <span class="res-value" id="res-a-pesos">$0.00 ARS</span>
             </div>
-        </div>
-
-        <div class="footer-info">
-            Cálculo automático e instantáneo en tiempo real.
+            <div class="resultado-item">
+                <span class="res-label">Si son Pesos (ARS):</span>
+                <span class="res-value" id="res-a-dolares">US$ 0.00</span>
+            </div>
         </div>
     </div>
 
     <script>
         const TASA_CAMBIO = 1500;
-        const usdInput = document.getElementById('usd-input');
-        const arsInput = document.getElementById('ars-input');
+        const montoInput = document.getElementById('monto-input');
+        const resAPesos = document.getElementById('res-a-pesos');
+        const resADolares = document.getElementById('res-a-dolares');
 
-        // Cuando el usuario escribe en Dólares
-        usdInput.addEventListener('input', () => {
-            const usdValue = parseFloat(usdInput.value);
+        montoInput.addEventListener('input', () => {
+            const valor = parseFloat(montoInput.value);
             
-            if (!isNaN(usdValue)) {
-                arsInput.value = (usdValue * TASA_CAMBIO).toFixed(2);
-            } else {
-                arsInput.value = '';
-            }
-        });
+            if (!isNaN(valor) && valor > 0) {
+                // Cálculo 1: De Dólares a Pesos (Multiplica)
+                const aPesos = valor * TASA_CAMBIO;
+                // Formateamos el número en estilo argentino (puntos para miles, coma para decimales)
+                resAPesos.textContent = '$' + aPesos.toLocaleString('es-AR', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' ARS';
 
-        // Cuando el usuario escribe en Pesos Argentinos
-        arsInput.addEventListener('input', () => {
-            const arsValue = parseFloat(arsInput.value);
-            
-            if (!isNaN(arsValue)) {
-                usdInput.value = (arsValue / TASA_CAMBIO).toFixed(2);
+                // Cálculo 2: De Pesos a Dólares (Divide)
+                const aDolares = valor / TASA_CAMBIO;
+                resADolares.textContent = 'US$ ' + aDolares.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
             } else {
-                usdInput.value = '';
+                // Si está vacío vuelve a cero
+                resAPesos.textContent = '$0.00 ARS';
+                resADolares.textContent = 'US$ 0.00';
             }
         });
     </script>
