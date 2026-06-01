@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cotizador USD / ARS</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Estilos Globales */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background-color: #f3f4f6; /* Fondo gris claro */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        /* Contenedor del Cotizador (Contained) */
+        .cotizador-container {
+            background-color: #ffffff;
+            max-width: 450px;
+            width: 100%;
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+            border: 1px solid #e5e7eb;
+        }
+
+        h1 {
+            font-size: 24px;
+            color: #1f2937;
+            text-align: center;
+            margin-bottom: 8px;
+            font-weight: 700;
+        }
+
+        .text-muted {
+            font-size: 14px;
+            color: #6b7280;
+            text-align: center;
+            margin-bottom: 24px;
+        }
+
+        /* Bloques de entrada */
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            font-size: 14px;
+            font-weight: 500;
+            color: #4b5563;
+            margin-bottom: 6px;
+        }
+
+        .input-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .currency-symbol {
+            position: absolute;
+            left: 14px;
+            color: #9ca3af;
+            font-weight: 500;
+        }
+
+        input[type="number"] {
+            width: 100%;
+            padding: 12px 14px 12px 35px;
+            font-size: 16px;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            outline: none;
+            transition: all 0.2s ease;
+            color: #111827;
+        }
+
+        input[type="number"]:focus {
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+        }
+
+        /* Eliminar flechas nativas de los inputs de número */
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+        input[type=number] {
+            -moz-appearance: textfield;
+        }
+
+        /* Footer del contenedor */
+        .footer-info {
+            margin-top: 24px;
+            padding-top: 16px;
+            border-top: 1px solid #f3f4f6;
+            text-align: center;
+            font-size: 12px;
+            color: #9ca3af;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="cotizador-container">
+        <h1>Cotizador de Divisas</h1>
+        <p class="text-muted">Tipo de cambio fijo: 1 USD = $1500 ARS</p>
+
+        <div class="input-group">
+            <label for="usd-input">Dólares Estadounidenses (USD)</label>
+            <div class="input-wrapper">
+                <span class="currency-symbol">US$</span>
+                <input type="number" id="usd-input" placeholder="0.00" min="0" step="any">
+            </div>
+        </div>
+
+        <div class="input-group">
+            <label for="ars-input">Pesos Argentinos (ARS)</label>
+            <div class="input-wrapper">
+                <span class="currency-symbol">$</span>
+                <input type="number" id="ars-input" placeholder="0.00" min="0" step="any">
+            </div>
+        </div>
+
+        <div class="footer-info">
+            Cálculo automático e instantáneo en tiempo real.
+        </div>
+    </div>
+
+    <script>
+        const TASA_CAMBIO = 1500;
+        const usdInput = document.getElementById('usd-input');
+        const arsInput = document.getElementById('ars-input');
+
+        // Cuando el usuario escribe en Dólares
+        usdInput.addEventListener('input', () => {
+            const usdValue = parseFloat(usdInput.value);
+            
+            if (!isNaN(usdValue)) {
+                arsInput.value = (usdValue * TASA_CAMBIO).toFixed(2);
+            } else {
+                arsInput.value = '';
+            }
+        });
+
+        // Cuando el usuario escribe en Pesos Argentinos
+        arsInput.addEventListener('input', () => {
+            const arsValue = parseFloat(arsInput.value);
+            
+            if (!isNaN(arsValue)) {
+                usdInput.value = (arsValue / TASA_CAMBIO).toFixed(2);
+            } else {
+                usdInput.value = '';
+            }
+        });
+    </script>
+</body>
+</html>
