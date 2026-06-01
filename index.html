@@ -16,10 +16,10 @@
         }
 
         body {
-            /* Fondo Rosa Pastel */
-            background-color: #FFD1DC; 
-            /* Diseño sutil de estrellas blancas usando SVG */
-            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 60 60"><path d="M15 5l1.2 2.5 2.8.4-2 2 1.3 2.6-2.3-1.5-2.3 1.5 1.3-2.6-2-2 2.8-.4L15 5zm30 30l.8 1.7 1.9.3-1.4 1.3.9 1.8-1.6-1-1.6 1 .9-1.8-1.4-1.3 1.9-.3.8-1.7zm5-20l.5 1 .9.2-.7.7.4 1-.8-.5-.8.5.4-1-.7-.7.9-.2.5-1z" fill="%23FFFFFF" fill-opacity="0.5"/></svg>');
+            /* Nuevo Fondo Rosa Claro */
+            background-color: #FFE5DF; 
+            /* Diseño sutil de estrellas blancas */
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 60 60"><path d="M15 5l1.2 2.5 2.8.4-2 2 1.3 2.6-2.3-1.5-2.3 1.5 1.3-2.6-2-2 2.8-.4L15 5zm30 30l.8 1.7 1.9.3-1.4 1.3.9 1.8-1.6-1-1.6 1 .9-1.8-1.4-1.3 1.9-.3.8-1.7zm5-20l.5 1 .9.2-.7.7.4 1-.8-.5-.8.5.4-1-.7-.7.9-.2.5-1z" fill="%23FFFFFF" fill-opacity="0.6"/></svg>');
             display: flex;
             justify-content: center;
             align-items: center;
@@ -34,7 +34,7 @@
             width: 100%;
             padding: 35px 30px;
             border-radius: 24px;
-            box-shadow: 0 12px 30px rgba(255, 182, 193, 0.4); /* Sombra rosa suave */
+            box-shadow: 0 12px 30px rgba(255, 182, 193, 0.25); /* Sombra suave */
             border: 1px solid rgba(255, 255, 255, 0.7);
             text-align: center;
         }
@@ -43,7 +43,7 @@
         h1 {
             font-size: 24px;
             color: #111827;
-            font-weight: 700; /* Negrita */
+            font-weight: 700;
             margin-bottom: 8px;
             letter-spacing: -0.5px;
         }
@@ -51,14 +51,14 @@
         /* Subtítulo en Montserrat Negro */
         .subtitulo {
             font-size: 14px;
-            color: #000000; /* Color negro */
+            color: #000000;
             font-weight: 500;
             margin-bottom: 28px;
         }
 
         /* Bloque del único Input */
         .input-group {
-            margin-bottom: 28px;
+            margin-bottom: 20px;
             text-align: left;
         }
 
@@ -66,7 +66,7 @@
             display: block;
             font-size: 13px;
             font-weight: 700;
-            color: #ff8fa3; /* Rosa oscuro estético para el label */
+            color: #ff8fa3; /* Rosa oscuro estético */
             text-transform: uppercase;
             margin-bottom: 8px;
             letter-spacing: 0.5px;
@@ -76,7 +76,7 @@
             width: 100%;
             padding: 14px 16px;
             font-size: 16px;
-            border: 2px solid #ffe4e1; /* Rosa muy pálido */
+            border: 2px solid #ffe4e1;
             border-radius: 12px;
             outline: none;
             transition: all 0.2s ease;
@@ -90,47 +90,23 @@
             background-color: #ffffff;
         }
 
-        /* Sección de Resultados */
-        .resultados-box {
-            background-color: #fff5f6; /* Fondo rosa ultra claro */
-            border-radius: 16px;
-            padding: 20px;
-            margin-bottom: 10px;
-            border: 1px dashed #ffccd5;
-        }
-
-        .resultado-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 10px 0;
-        }
-
-        .resultado-item:first-child {
-            border-bottom: 1px solid #ffe4e1;
-        }
-
-        .res-label {
-            font-size: 13px;
-            color: #666666;
-            font-weight: 500;
-            text-align: left;
-        }
-
-        .res-value {
-            font-size: 18px;
-            color: #ff758f; /* Rosa destacado para el precio */
+        /* Espacio para el resultado final grande */
+        .total-box {
+            font-size: 32px;
             font-weight: 700;
+            color: #ff758f; /* Rosa destacado */
+            margin: 20px 0 25px 0;
+            min-height: 40px;
         }
 
-        /* Eliminar flechas nativas del input */
-        input::-webkit-outer-spin-button,
-        input::-webkit-inner-spin-button {
-            -webkit-appearance: none;
-            margin: 0;
-        }
-        input[type=number] {
-            -moz-appearance: textfield;
+        /* Texto de cierre abajo del cotizador */
+        .mensaje-final {
+            font-size: 13px;
+            color: #555555;
+            font-weight: 500;
+            line-height: 1.5;
+            border-top: 1px dashed #ffe4e1;
+            padding-top: 20px;
         }
     </style>
 </head>
@@ -146,41 +122,31 @@
             <input type="number" id="monto-input" placeholder="0.00" min="0" step="any" autofocus>
         </div>
 
-        <!-- Cuadro de resultados automáticos -->
-        <div class="resultados-box">
-            <div class="resultado-item">
-                <span class="res-label">Si son Dólares (USD):</span>
-                <span class="res-value" id="res-a-pesos">$0.00 ARS</span>
-            </div>
-            <div class="resultado-item">
-                <span class="res-label">Si son Pesos (ARS):</span>
-                <span class="res-value" id="res-a-dolares">US$ 0.00</span>
-            </div>
+        <!-- Muestra el resultado de la conversión directamente en Pesos -->
+        <div class="total-box" id="resultado-pesos">
+            $0,00 ARS
+        </div>
+
+        <!-- Mensaje final solicitado -->
+        <div class="mensaje-final">
+            una vez cotizado, mandame por dm el link de poca así compro &lt;3
         </div>
     </div>
 
     <script>
         const TASA_CAMBIO = 1500;
         const montoInput = document.getElementById('monto-input');
-        const resAPesos = document.getElementById('res-a-pesos');
-        const resADolares = document.getElementById('res-a-dolares');
+        const resultadoPesos = document.getElementById('resultado-pesos');
 
         montoInput.addEventListener('input', () => {
             const valor = parseFloat(montoInput.value);
             
             if (!isNaN(valor) && valor > 0) {
-                // Cálculo 1: De Dólares a Pesos (Multiplica)
-                const aPesos = valor * TASA_CAMBIO;
-                // Formateamos el número en estilo argentino (puntos para miles, coma para decimales)
-                resAPesos.textContent = '$' + aPesos.toLocaleString('es-AR', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' ARS';
-
-                // Cálculo 2: De Pesos a Dólares (Divide)
-                const aDolares = valor / TASA_CAMBIO;
-                resADolares.textContent = 'US$ ' + aDolares.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+                const totalPesos = valor * TASA_CAMBIO;
+                // Formato local de Argentina (puntos para miles, coma para decimales)
+                resultadoPesos.textContent = '$' + totalPesos.toLocaleString('es-AR', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' ARS';
             } else {
-                // Si está vacío vuelve a cero
-                resAPesos.textContent = '$0.00 ARS';
-                resADolares.textContent = 'US$ 0.00';
+                resultadoPesos.textContent = '$0,00 ARS';
             }
         });
     </script>
